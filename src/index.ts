@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-
+import dashboardRoutes from "./routes/dashboardRoutes";
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -14,9 +14,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.get("/", (req, res) => {
-  res.send("initializing the project");
-});
+app.use("/dashboard", dashboardRoutes);
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log("Server running on Port : ", port);
